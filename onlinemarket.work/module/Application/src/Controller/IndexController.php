@@ -23,6 +23,10 @@ class IndexController extends AbstractActionController
     {
 		$nameFromGet = $this->params()->fromQuery('name_get', 'From GET');
 		$nameFromRoute = $this->params()->fromRoute('name_route', 'From ROUTE');
-        return new ViewModel(['nameFromGet' => $nameFromGet, 'nameFromRoute' => $nameFromRoute]);
+        return new ViewModel(['nameFromGet' => $nameFromGet, 'nameFromRoute' => $nameFromRoute, 'date' => $this->someDate()]);
+    }
+    public function redirectAction()
+    {
+        return $this->redirect()->toUrl('https://getlaminas.org');
     }
 }

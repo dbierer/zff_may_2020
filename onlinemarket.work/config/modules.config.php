@@ -12,7 +12,11 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    // enabled in development only!
+    'WhoopsErrorHandler',
     'Laminas\Router',
     'Laminas\Validator',
     'Application',
+    'Market',
 ];
+
