@@ -4,6 +4,8 @@
 * Research settings needed to enable Whoops error handling
 
 ## Homework
+* For Wed 13 May
+  * Lab: Creating and Accessing a Service
 * For Mon 11 May
   * Lab: Using a Built-in Controller Plugin
   * Lab: Using a Custom Controller Plugin
@@ -103,5 +105,8 @@ mkdir view/market
 mkdir view/market/index
 touch view/market/index/index.phtml
 ```
-
+* file:///D:/Repos/ZF-Level-1/Course_Materials/index.html#/5/31: the path s/be
+```
+onlinemarket.work\module\Application\config\module.config.php
+```
 

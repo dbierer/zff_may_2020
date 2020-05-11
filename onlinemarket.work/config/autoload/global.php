@@ -13,5 +13,10 @@
  */
 
 return [
-    // ...
+    'service_manager' => [
+		'services' => [
+			'demo-test-scalar' => __FILE__,
+			'demo-test-array' => [ __FILE__ ],
+		],
+	],
 ];

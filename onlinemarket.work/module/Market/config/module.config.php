@@ -53,6 +53,17 @@ return [
 							],
 						],
 					],
+					'post' => [
+						'type'    => Segment::class,
+						'options' => [
+							// add additional params to "route" key if needed
+							'route'    => '/post',
+							'defaults' => [
+								'controller' => Controller\PostController::class,
+								'action'     => 'index',
+							],
+						],
+					],
                 ],
             ],
         ],
@@ -61,6 +72,7 @@ return [
         'factories' => [
             Controller\IndexController::class => Controller\IndexControllerFactory::class,
             Controller\ViewController::class => Controller\ViewControllerFactory::class,
+            Controller\PostController::class => Controller\PostControllerFactory::class,
         ],
     ],
     'controller_plugins' => [

@@ -18,5 +18,7 @@ return [
     'Laminas\Validator',
     'Application',
     'Market',
+    'Demo',
 ];
+
 
