@@ -15,7 +15,13 @@ class IndexController extends AbstractActionController
 		$response = $this->getResponse();
 		$headers  = $response->getHeaders();
 		$headers->addHeaderLine('Accept', 'application/json');
-        return new ViewModel(['some_date' => $this->someDate(), 'request' => $this->getRequest()]);
+        return new ViewModel(
+			[
+				'some_date' => $this->someDate(), 
+				'request' => $this->getRequest(),
+				'dayWeekMonth' => $this->dayWeekMonth(),
+			]
+		);
     }
     public function adminAction()
     {

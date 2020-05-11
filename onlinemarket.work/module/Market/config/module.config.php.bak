@@ -43,16 +43,6 @@ return [
                             'defaults' => ['action' => 'config'],
                         ],
                     ],
-					'view' => [
-						'type'    => Segment::class,
-						'options' => [
-							'route'    => '/view',
-							'defaults' => [
-								'controller' => Controller\ViewController::class,
-								'action'     => 'index',
-							],
-						],
-					],
                 ],
             ],
         ],
@@ -60,17 +50,14 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => Controller\IndexControllerFactory::class,
-            Controller\ViewController::class => Controller\ViewControllerFactory::class,
         ],
     ],
     'controller_plugins' => [
         'factories' => [
             Controller\Plugin\DatePlugin::class => InvokableFactory::class,
-            Controller\Plugin\DayWeekMonth::class => InvokableFactory::class,
         ],
         'aliases' => [
-			'someDate' => Controller\Plugin\DatePlugin::class,
-			'dayWeekMonth' => Controller\Plugin\DayWeekMonth::class,
+			'someDate' => Controller\Plugin\DatePlugin::class
 		],
     ],
     'view_manager' => [
