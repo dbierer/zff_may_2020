@@ -1,0 +1,11 @@
+<h1>Market Login</h1>
+Please Login!
+<form method="post" action="<?= $this->url('market/login') ?>">
+<br>Username <input type="text" name="username" />
+<br>Password <input type="password" name="password" />
+<br><input type="submit" name="submit" />
+</form>
+<hr>
+<pre>
+<?= htmlspecialchars(var_export($this->data, TRUE)) ?>
+</pre>

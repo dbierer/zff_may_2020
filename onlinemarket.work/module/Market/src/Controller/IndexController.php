@@ -17,6 +17,19 @@ class IndexController extends AbstractActionController
 		$headers->addHeaderLine('Accept', 'application/json');
         return new ViewModel(['some_date' => $this->someDate(), 'request' => $this->getRequest()]);
     }
+    public function adminAction()
+    {
+        $isLoggedIn = $this->params()->fromQuery('isLoggedIn', FALSE);
+        if (!$isLoggedIn) {
+            return $this->redirect()->toRoute('market/login');
+        }
+        return new ViewModel();
+    }
+    public function loginAction()
+    {
+        $data = $this->params()->fromPost();
+		return new ViewModel(['data' => $data]);
+	}
     public function configAction()
     {
 		return new ViewModel(['config' => $this->container->get('Config')]);
