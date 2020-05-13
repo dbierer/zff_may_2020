@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Global Configuration Override
  *
@@ -11,12 +10,29 @@
  * control, so do not include passwords or other sensitive information in this
  * file.
  */
-
 return [
     'service_manager' => [
 		'services' => [
 			'demo-test-scalar' => __FILE__,
 			'demo-test-array' => [ __FILE__ ],
-		],
-	],
+            'global-categories' => [
+                'barter',
+                'beauty',
+                'clothing',
+                'computer',
+                'entertainment',
+                'free',
+                'garden',
+                'general',
+                'health',
+                'household',
+                'phones',
+                'property',
+                'sporting',
+                'tools',
+                'transportation',
+                'wanted'
+            ]
+        ]
+    ]
 ];

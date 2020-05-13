@@ -5,10 +5,11 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 class IndexController extends AbstractActionController
 {
-	protected $container;
-	public function __construct($container)
+	protected $categories;
+	protected $config;
+	public function __construct(array $categories, array $config)
 	{
-		$this->container = $container;
+		$this->categories = $categories;
 	}
     public function indexAction()
     {
@@ -20,6 +21,7 @@ class IndexController extends AbstractActionController
 				'some_date' => $this->someDate(), 
 				'request' => $this->getRequest(),
 				'dayWeekMonth' => $this->dayWeekMonth(),
+				'categories' => $this->categories,
 			]
 		);
     }
@@ -38,6 +40,6 @@ class IndexController extends AbstractActionController
 	}
     public function configAction()
     {
-		return new ViewModel(['config' => $this->container->get('Config')]);
+		return new ViewModel(['config' => $this->config]);
 	}
 }

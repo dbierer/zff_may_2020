@@ -59,4 +59,9 @@ class IndexController extends AbstractActionController
 		$viewModel = new ViewModel();
 		return $viewModel;
 	}
+	public function camelCaseToDashAction()
+	{
+		$viewModel = new ViewModel();
+		return $viewModel;
+	}
 }

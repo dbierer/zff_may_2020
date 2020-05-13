@@ -4,6 +4,10 @@
 * Research settings needed to enable Whoops error handling
 
 ## Homework
+* For Fri 15 May
+  * Lab: Manipulating Views and Layouts
+  * Lab: Create a Custom View Helper
+  * Lab: Forms
 * For Wed 13 May
   * Lab: Creating and Accessing a Service
 * For Mon 11 May
