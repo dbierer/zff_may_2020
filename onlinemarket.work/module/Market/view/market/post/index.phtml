@@ -1,2 +1,5 @@
-<h1>Market View</h1>
-PostController
+<h1>Post to the Market</h1>
+<?php $this->postForm->prepare(); ?>
+<?= $this->form()->openTag($this->postForm); ?>
+<?= $this->formCollection($this->postForm); ?>
+<?= $this->form()->closeTag(); ?>

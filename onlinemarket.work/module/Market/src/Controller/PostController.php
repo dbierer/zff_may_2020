@@ -3,15 +3,16 @@ declare(strict_types=1);
 namespace Market\Controller;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use Laminas\Form\Form;
 class PostController extends AbstractActionController
 {
-	protected $name = '';
-	public function __construct(string $name)
+	protected $form = '';
+	public function __construct(Form $form)
 	{
-		$this->name = $name;
+		$this->form = $form;
 	}
     public function indexAction()
     {
-        return new ViewModel();
+        return new ViewModel(['postForm' => $this->form]);
     }
 }
