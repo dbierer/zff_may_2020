@@ -3,7 +3,7 @@ Date From Plugin SomeDate: <?= $this->some_date ?>
 <br>Date From Plugin DayWeekMonth: <?= $this->dayWeekMonth ?>
 <hr>
 <h2>Categories</h2>
-<?= $this->htmlList($this->categories) ?>
+<?= $this->leftLinks($this->categories, $this->url()) ?>
 <br>Request Object: <?= get_class($this->request) ?>
 <pre>
 	<?php var_dump($this->request->getServer()); ?>

@@ -19,7 +19,7 @@ class PostFormFactory implements FactoryInterface
         $combinedCategories = array_combine($categories, $categories);
         $expireDays = $container->get('market-expire-days');
         $captchaAdapter = new ImageCaptcha();
-        $captchaAdapter->setWordlen(4)->setOptions($container->get('market-captcha-options'));
+        $captchaAdapter->setWordlen(6)->setOptions($container->get('market-captcha-options'));
         $formConfig = $container->get('market-post-form-config');
         $formConfig['elements']['category']['spec']['options']['value_options'] = $combinedCategories;
         $formConfig['elements']['expires']['spec']['options']['value_options'] = $expireDays;

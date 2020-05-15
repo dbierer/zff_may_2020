@@ -2,8 +2,11 @@
 
 ## TODO
 * Research settings needed to enable Whoops error handling
+* Diagram that summarizes Signals and Slots
 
 ## Homework
+* For Mon 18 May
+  * Lab: Events
 * For Fri 15 May
   * Lab: Manipulating Views and Layouts
   * Lab: Create a Custom View Helper
@@ -52,6 +55,13 @@ composer require --dev phpcl/laminas-tools
 ```
 
 ## Class Discussion
+* Major Event Classes
+  * https://github.com/laminas/laminas-modulemanager/blob/master/src/ModuleEvent.php
+  * https://github.com/laminas/laminas-mvc/blob/master/src/MvcEvent.php
+  * https://github.com/laminas/laminas-view/blob/master/src/ViewEvent.php
+* OOP Software Design Patterns
+  * From the "Gang of Four": https://www.amazon.com/Design-Patterns-Object-Oriented-Addison-Wesley-Professional-ebook/dp/B000SEIBB8/ref=sr_1_1?dchild=1&keywords=Design+Patterns%3A+Elements+of+Reusable+Object-Oriented+Software&qid=1589553761&sr=8-1
+  * https://www.amazon.com/Patterns-Enterprise-Application-Architecture-Martin/dp/0321127420
 * Inversion of Control / Services Containers
   * https://martinfowler.com/bliki/InversionOfControl.html
 * Docker

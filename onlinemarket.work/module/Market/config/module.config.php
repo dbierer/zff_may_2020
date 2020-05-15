@@ -86,14 +86,26 @@ return [
 			'dayWeekMonth' => Controller\Plugin\DayWeekMonth::class,
 		],
     ],
+    'view_helpers' => [
+        'factories' => [
+			Helpers\LeftLinks::class => InvokableFactory::class,
+        ],
+        'aliases' => [
+			'leftLinks' => Helpers\LeftLinks::class,
+		],		
+    ],
     'view_manager' => [
         'template_path_stack' => [__DIR__ . '/../view'],
     ],
     'service_manager' => [
         'factories' => [
+            Form\PostFilter::class => Form\PostFilterFactory::class,
             Form\PostForm::class => Form\PostFormFactory::class,
         ],
         'services' => [
+			// TODO: create post filter config
+			'market-post-filter-config' => [
+			],
             // 'market-post-form-config' overrides needed:
             // $formConfig['elements']['category']['spec']['options']['value_options'] = $combinedCategories
             // $formConfig['elements']['expires']['spec']['options']['value_options'] = $expireDays
@@ -119,41 +131,40 @@ return [
                         'spec' => [
                             'name' => 'title',
                             'type' => 'text',
+                            'attributes' => ['placeholder' => 'Enter posting title'],
                             'options' => [
                                 'label' => 'Title',
+								'label_attributes' => ['style' => 'display: block'],
                             ],
-                            'attributes' => ['placeholder' => 'Enter posting title'],
-                            'label_attributes' => ['style' => 'display: block'],
                         ],
                     ],
                     'photo_filename' => [
                         'spec' => [
                             'name' => 'photo_filename',
                             'type' => 'text',
-                            'options' => [
-                                'label' => 'Photo File',
-                                'label_attributes' => ['style' => 'display: block'],
-                            ],
                             'attributes' => [
                                 'maxlength' => 1024,
                                 'placeholder' => 'Enter image URL',
                             ],
-
+                            'options' => [
+                                'label' => 'Photo File',
+                                'label_attributes' => ['style' => 'display: block'],
+                            ],
                         ],
                     ],
                     'price' => [
                         'spec' => [
                             'name' => 'price',
                             'type' => 'text',
-                            'options' => [
-                                'label' => 'Price',
-                                'label_attributes' => ['style' => 'display: block'],
-                            ],
                             'attributes' => [
                                 'title' => 'Enter price as nnn.nn',
                                 'size' => 16,
                                 'maxlength' => 16,
                                 'placeholder' => 'Enter a value',
+                            ],
+                            'options' => [
+                                'label' => 'Price',
+                                'label_attributes' => ['style' => 'display: block'],
                             ],
                         ],
                     ],
@@ -161,14 +172,14 @@ return [
                         'spec' => [
                             'name' => 'expires',
                             'type' => 'radio',
+                            'attributes' => [
+                                'title' => 'The expiration date will be calculated from today',
+                                'class' =>  'expiresButton',
+                            ],
                             'options' => [
                                 'label' => 'Expires',
                                 // needs to be overridden by the factory
                                 'value_options' => NULL,
-                            ],
-                            'attributes' => [
-                                'title' => 'The expiration date will be calculated from today',
-                                'class' =>  'expiresButton',
                             ],
                         ],
                     ],
@@ -176,14 +187,14 @@ return [
                         'spec' => [
                             'name' => 'cityCode',
                             'type' => 'text',
-                            'options' => [
-                                'label' => 'Nearest City,Country',
-                                'label_attributes' => ['style' => 'display: inline'],
-                            ],
                             'attributes' => [
                                 'title' => 'Enter as "city,country" using 2 letter ISO code for country',
                                 'id' => 'cityCode',
                                 'placeholder' => 'City Name,CC',
+                            ],
+                            'options' => [
+                                'label' => 'Nearest City,Country',
+                                'label_attributes' => ['style' => 'display: inline'],
                             ],
                         ],
                     ],
@@ -191,14 +202,14 @@ return [
                         'spec' => [
                             'name' => 'contact_name',
                             'type' => 'text',
-                            'options' => [
-                                'label' => 'Contact Name',
-                                'label_attributes' => ['style' => 'display: block'],
-                            ],
                             'attributes' => [
                                 'title' => 'Enter the name of the person to contact for this item',
                                 'size' => 40,
                                 'maxlength' => 255,
+                            ],
+                            'options' => [
+                                'label' => 'Contact Name',
+                                'label_attributes' => ['style' => 'display: block'],
                             ],
                         ],
                     ],
@@ -206,14 +217,14 @@ return [
                         'spec' => [
                             'name' => 'contact_phone',
                             'type' => 'text',
-                            'options' => [
-                                'label' => 'Contact Phone Number',
-                                'label_attributes' => ['style' => 'display: block'],
-                            ],
                             'attributes' => [
                                 'title' => 'Enter the phone number of the person to contact for this item',
                                 'size' => 20,
                                 'maxlength' => 32,
+                            ],
+                            'options' => [
+                                'label' => 'Contact Phone Number',
+                                'label_attributes' => ['style' => 'display: block'],
                             ],
                         ],
                     ],
@@ -221,14 +232,14 @@ return [
                         'spec' => [
                             'name' => 'contact_email',
                             'type' => 'email',
-                            'options' => [
-                                'label' => 'Contact Email',
-                                'label_attributes' => ['style' => 'display: block'],
-                            ],
                             'attributes' => [
                                 'title' => 'Enter the email address of the person to contact for this item',
                                 'size' => 40,
                                 'maxlength' => 255,
+                            ],
+                            'options' => [
+                                'label' => 'Contact Email',
+                                'label_attributes' => ['style' => 'display: block'],
                             ],
                         ],
                     ],
@@ -236,13 +247,13 @@ return [
                         'spec' => [
                             'name' => 'description',
                             'type' => 'textarea',
-                            'options' => [
-                                'label' => 'Description',
-                            ],
                             'attributes' => [
                                 'title' => 'Enter a suitable description for this posting',
                                 'rows' => 4,
                                 'cols' => 80,
+                            ],
+                            'options' => [
+                                'label' => 'Description',
                             ],
                         ],
                     ],
@@ -250,30 +261,30 @@ return [
                         'spec' => [
                             'name' => 'delete_code',
                             'type' => 'text',
-                            'options' => [
-                                'label' => 'Delete Code',
-                                'label_attributes' => ['style' => 'display: block'],
-                            ],
                             'attributes' => [
                                 'title' => 'Enter the delete code for this item',
                                 'size' => 16,
                                 'maxlength' => 16,
                             ],
-                        ],
+                             'options' => [
+                                'label' => 'Delete Code',
+                                'label_attributes' => ['style' => 'display: block'],
+                            ],
+                       ],
                     ],
                     'captcha' => [
                         'spec' => [
                             'name' => 'captcha',
                             'type' => 'captcha',
-                            'options' => [
-                                'label'   => 'Help us to prevent SPAM!',
-                                // needs to be overridden by the factory
-                                'captcha' => NULL,
-                            ],
                             'attributes' => [
                                 'title' => 'Enter the delete code for this item',
                                 'size' => 16,
                                 'maxlength' => 16,
+                            ],
+                            'options' => [
+                                'label'   => 'Help us to prevent SPAM!',
+                                // needs to be overridden by the factory
+                                'captcha' => NULL,
                             ],
                         ],
                     ],
