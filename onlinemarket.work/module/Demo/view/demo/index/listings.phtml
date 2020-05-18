@@ -1,0 +1,10 @@
+<h1>Demo Listings Query</h1>
+<hr>
+<?php if ($this->result) : ?>
+	<pre>
+	<?php var_dump($this->result); ?>
+	<?php foreach ($this->result as $item) var_dump($item); ?>
+	</pre>
+<?php else : ?>
+	No Results
+<?php endif; ?>

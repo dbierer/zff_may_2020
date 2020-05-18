@@ -19,6 +19,7 @@ class IndexControllerFactory implements FactoryInterface
         $controller = new IndexController();
         $controller->demoScalar = $container->get('demo-test-scalar');
         $controller->demoArray = $container->get('demo-test-array');
+        $controller->adapter = $container->get('DemoAdapter');
         return $controller;
     }
 }

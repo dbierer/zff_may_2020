@@ -7,6 +7,7 @@ class IndexController extends AbstractActionController
 {
 	public $demoScalar = NULL;
 	public $demoArray = NULL;
+	public $adapter = NULL;
     public function indexAction()
     {
         return new ViewModel(['demoScalar' => $this->demoScalar, 'demoArray' => $this->demoArray]);
@@ -63,5 +64,11 @@ class IndexController extends AbstractActionController
 	{
 		$viewModel = new ViewModel();
 		return $viewModel;
+	}
+	public function listingsAction()
+	{
+		$sql = 'SELECT * FROM listings';
+		$result = $this->adapter->query($sql, []);
+		return new ViewModel(['result' => $result]);
 	}
 }

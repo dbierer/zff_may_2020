@@ -333,6 +333,7 @@ return [
                     'name' => 'Regex',
                     'options' => [
                         'pattern' =>'/^[a-zA-Z0-9 ]*$/',
+                        // error message not showing: using default???
                         'error_message' => 'Title should only contain numbers, letters or spaces!',
                     ]
                 ],
@@ -441,7 +442,6 @@ return [
                 [ 'name' => 'StripTags' ],
                 [ 'name' => 'StringTrim' ],
             ],
-            'error_message' => 'Phone number must be in this format: +nnnn-nnn-nnn-nnnn',
         ],
         'description' => [
             'name' => 'description',

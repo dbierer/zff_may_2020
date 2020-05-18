@@ -16,7 +16,7 @@ class Module
     public function onBootstrap(MvcEvent $e)
     {
         $em = $e->getApplication()->getEventManager();
-        $em->attach(MvcEvent::EVENT_DISPATCH, [$this, 'onDispatch']);
+        $em->attach(MvcEvent::EVENT_DISPATCH, [$this, 'onDispatch'], 99);
     }
     public function onDispatch(MvcEvent $e)
     {

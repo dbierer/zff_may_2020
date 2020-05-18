@@ -34,6 +34,11 @@ sudo tail /var/log/apache2/error.log
 sudo gedit /etc/php/7.3/apache2/php.ini
 sudo service apache2 restart
 ```
+* If you get this error: 
+```
+Declaration of Demo\Factory\AdapterFactory::__invoke(Psr\Container\ContainerInterface $container, $requestedName, ?array $options = NULL) must be compatible with Laminas\ServiceManager\Factory\FactoryInterface::__invoke(Interop\Container\ContainerInterface $container, $requestedName, ?array $options = NULL)
+```
+  * Change the `use Psr\Container\ContainerInterface;` to this: `use Interop\Container\ContainerInterface;`
 * If you get this error: ` Module (Market) could not be initialized`
   * Check to see if module is in `composer.json::autoload::psr-4`
   * Have you refreshed Composer?  (ie. `composer update` or `composer dump-autoload`)
@@ -53,7 +58,8 @@ sudo service apache2 restart
 ```
 composer require --dev phpcl/laminas-tools
 ```
-
+* Laminas DB
+  * https://docs.laminas.dev/laminas-db/
 ## Class Discussion
 * Major Event Classes
   * https://github.com/laminas/laminas-modulemanager/blob/master/src/ModuleEvent.php
@@ -123,4 +129,10 @@ touch view/market/index/index.phtml
 ```
 onlinemarket.work\module\Application\config\module.config.php
 ```
+* file:///D:/Repos/ZF-Level-1/Course_Materials/index.html#/9/10: the 2nd example is not correct according to a MySQL platform.  s/be:
+```
+// `schema`.`fooTable`
+echo $platform->quoteIdentifierChain(['schema', 'fooTable']);```
 
+## VM NOTES
+* phpMyAdmin needs to be updated!  incompatible with the current version of PHP

@@ -34,5 +34,8 @@ return [
 			'demo-test-scalar' => __FILE__,
 			'demo-test-array' => [ __FILE__ ],
 		],
+		'factories' => [
+			'DemoAdapter' => Factory\AdapterFactory::class,
+		],
 	],
 ];
