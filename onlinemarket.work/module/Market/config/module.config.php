@@ -92,7 +92,7 @@ return [
         ],
         'aliases' => [
 			'leftLinks' => Helpers\LeftLinks::class,
-		],		
+		],
     ],
     'view_manager' => [
         'template_path_stack' => [__DIR__ . '/../view'],
@@ -103,9 +103,21 @@ return [
             Form\PostForm::class => Form\PostFormFactory::class,
         ],
         'services' => [
-			// TODO: create post filter config
-			'market-post-filter-config' => [
-			],
+            // 'market-post-filter-config' overrides needed:
+            // $filtConfig['category']['validators']['options']['haystack'] = $categories
+            // $filtConfig['expires']['validators']['options']['haystack'] = $expireDays
+            // $filtConfig['cityCode']['validators']['options']['callback'] =
+            /*
+            function ($val) {
+                if (!strpos($val, ',')) return FALSE;
+                [$city, $country] = explode(',', $val);
+                if ($city === NULL || $country === NULL) return FALSE;
+                if (strlen($country) != 2) return FALSE;
+                if ($country !== strtoupper($country)) return FALSE;
+                return TRUE;
+            });
+            */
+
             // 'market-post-form-config' overrides needed:
             // $formConfig['elements']['category']['spec']['options']['value_options'] = $combinedCategories
             // $formConfig['elements']['expires']['spec']['options']['value_options'] = $expireDays
@@ -300,6 +312,157 @@ return [
                         ],
                     ],
                 ],
+            ],
+        ],
+    ],
+    'market-post-filter-config' => [
+        'category' => [
+            'name' => 'category',
+            'required' => TRUE,
+            'filters' => [
+                [ 'name' => 'StringToLower' ],
+                [ 'name' => 'StripTags' ],
+                [ 'name' => 'StringTrim' ],
+            ],
+        ],
+        'title' => [
+            'name' => 'title',
+            'required' => TRUE,
+            'validators' => [
+                [
+                    'name' => 'Regex',
+                    'options' => [
+                        'pattern' =>'/^[a-zA-Z0-9 ]*$/',
+                        'error_message' => 'Title should only contain numbers, letters or spaces!',
+                    ]
+                ],
+                [
+                    'name' => 'StringLength',
+                    'options' => ['min' => 1, 'max' => 128]
+                ],
+            ],
+            'filters' => [
+                [ 'name' => 'StripTags' ],
+                [ 'name' => 'StringTrim' ],
+            ],
+        ],
+        'photo_filename' => [
+            'name' => 'photo_filename',
+            'allow_empty' => TRUE,
+            'validators' => [
+                [
+                    'name' => 'Regex',
+                    'options' => [
+                        'pattern' => '!^(http(s)?://)?[a-z0-9./_-]+(jp(e)?g|png)$!i',
+                    ],
+                ]
+            ],
+            'filters' => [
+                [ 'name' => 'StripTags' ],
+                [ 'name' => 'StringTrim' ],
+            ],
+            'error_message' => 'Photo must be a URL or a valid filename ending with jpg or png.  '
+                            . 'TO NOTICE: this error message overrides the default message associated with the validator.',
+        ],
+        'price' => [
+            'name' => 'price',
+            'allow_empty' => TRUE,
+            'validators' => [
+                [
+                    'name' => 'GreaterThan',
+                    'options' => [
+                        'min' => 0.00,
+                    ]
+                ]
+            ],
+            'filters' => [
+                ['name' => 'ToFloat']
+            ],
+        ],
+        'expires' => [
+            'name' => 'expires',
+            'required' => TRUE,
+            'filters' => [
+                [ 'name' => 'Digits' ],
+            ],
+        ],
+        'cityCode' => [
+            'name' => 'cityCode',
+            'required' => TRUE,
+            'filters' => [
+                [ 'name' => 'StripTags' ],
+                [ 'name' => 'StringTrim' ],
+            ],
+            'error_message' => 'What you entered did take this form: NNNN,CC where NNNN = the city name, and CC = 2 digit ISO country code'
+        ],
+        'contact_name' => [
+            'name' => 'contact_name',
+            'allow_empty' => TRUE,
+            'validators' => [
+                [
+                    'name' => 'Regex',
+                    'options' => [
+                        'pattern' => '/^[a-z0-9., -]{1,255}$/i',
+                    ],
+                ]
+            ],
+            'filters' => [
+                [ 'name' => 'StripTags' ],
+                [ 'name' => 'StringTrim' ],
+            ],
+            'error_message' => 'Name should only contain letters, numbers, and some punctuation.',
+        ],
+        'contact_phone' => [
+            'name' => 'contact_phone',
+            'allow_empty' => TRUE,
+            'validators' => [
+                [
+                    'name' => 'Regex',
+                    'options' => [
+                        'pattern' => '/^\+?\d{1,4}(-\d{3,4})+$/',
+                    ],
+                ]
+            ],
+            'filters' => [
+                [ 'name' => 'StripTags' ],
+                [ 'name' => 'StringTrim' ],
+            ],
+            'error_message' => 'Phone number must be in this format: +nnnn-nnn-nnn-nnnn',
+        ],
+        'contact_email' => [
+            'name' => 'contact_email',
+            'required' => TRUE,
+            'validators' => [
+                [
+                    'name' => 'EmailAddress',
+                ]
+            ],
+            'filters' => [
+                [ 'name' => 'StripTags' ],
+                [ 'name' => 'StringTrim' ],
+            ],
+            'error_message' => 'Phone number must be in this format: +nnnn-nnn-nnn-nnnn',
+        ],
+        'description' => [
+            'name' => 'description',
+            'allow_empty' => TRUE,
+            'validators' => [
+                [
+                    'name' => 'StringLength',
+                    'options' => [ 'min' => 1, 'max' => 4096 ]
+                ]
+            ],
+            'filters' => [
+                [ 'name' => 'StripTags' ],
+                [ 'name' => 'StringTrim' ],
+            ],
+            'error_message' => 'Phone number must be in this format: +nnnn-nnn-nnn-nnnn',
+        ],
+        'delete_code' => [
+            'name' => 'delete_code',
+            'required' => TRUE,
+            'filters' => [
+                [ 'name' => 'Digits' ],
             ],
         ],
     ],

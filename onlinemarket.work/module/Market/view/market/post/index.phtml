@@ -3,3 +3,7 @@
 <?= $this->form()->openTag($this->postForm); ?>
 <?= $this->formCollection($this->postForm); ?>
 <?= $this->form()->closeTag(); ?>
+<hr>
+<?= $this->message ?>
+<hr>
+<pre><?= var_export($this->data, TRUE); ?></pre>

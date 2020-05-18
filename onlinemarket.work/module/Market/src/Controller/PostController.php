@@ -13,6 +13,17 @@ class PostController extends AbstractActionController
 	}
     public function indexAction()
     {
-        return new ViewModel(['postForm' => $this->form]);
+        $data = [];
+        $message = 'Please enter appropriate form data';
+        if ($this->getRequest()->isPost()) {
+            $this->form->setData($this->params()->fromPost());
+            if ($this->form->isValid()) {
+                $message = 'SUCCESS: form data is valid';
+                $data = $form->getData();
+            } else {
+                $message = 'ERROR: form data failed validation';
+            }
+        }
+        return new ViewModel(['postForm' => $this->form, 'message' => $message, 'data' => $data]);
     }
 }

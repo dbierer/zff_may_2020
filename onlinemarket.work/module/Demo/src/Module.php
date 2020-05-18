@@ -13,7 +13,7 @@ class Module
 	{
 		$eventName   = $e->getName();
 		$targetClass = get_class($e->getTarget());
-		echo '<br>' . $eventName . ':' . $targetClass;
+		error_log(__METHOD__ . ': EVENT : ' . $eventName . ' : TRIGGER CLASS : ' . $targetClass);
 	}
     public function getConfig() : array
     {

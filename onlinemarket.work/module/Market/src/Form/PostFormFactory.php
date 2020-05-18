@@ -25,6 +25,8 @@ class PostFormFactory implements FactoryInterface
         $formConfig['elements']['expires']['spec']['options']['value_options'] = $expireDays;
         $formConfig['elements']['captcha']['spec']['options']['captcha'] = $captchaAdapter;
         $formFactory = new FormFactory();
-        return $formFactory->createForm($formConfig);
+        $form = $formFactory->createForm($formConfig);
+        $form->setInputFilter($container->get('Market\Form\PostFilter'));
+        return $form;
     }
 }
