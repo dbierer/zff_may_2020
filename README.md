@@ -133,6 +133,65 @@ onlinemarket.work\module\Application\config\module.config.php
 ```
 // `schema`.`fooTable`
 echo $platform->quoteIdentifierChain(['schema', 'fooTable']);```
+* Needs to be rewritten as follows:
+```
+namespace FooModule\Model;
+...
+class FooModel {
+    public function getFoo(){
+        $select = $this->sql->select();
+        $select->from('products')
+               ->where(
+					(new Where())
+				   ->greaterThanOrEqualTo('qty_oh', 10)
+				   ->lessThan('cost', 100)
+				);
+        // Extract the SQL statement
+        echo $select->getSqlString($this->sql->getAdapter()->getPlatform());
+        // SELECT `products`.* FROM `products` WHERE `qty_oh` >= '10' AND `cost` < '100'
+        ...
+    }
+}
+```
+* Or write it this way:
+```
+namespace FooModule\Model;
+...
+class FooModel {
+    public function getFoo(){
+		$where = new Where();
+	    $where->greaterThanOrEqualTo('qty_oh', 10)
+			  ->lessThan('cost', 100);
+        $select = $this->sql->select();
+        $select->from('products')
+               ->where($where);
+        // Extract the SQL statement
+        echo $select->getSqlString($this->sql->getAdapter()->getPlatform());
+        // SELECT `products`.* FROM `products` WHERE `qty_oh` >= '10' AND `cost` < '100'
+        ...
+    }
+}
+```
+* file:///D:/Repos/ZF-Level-1/Course_Materials/index.html#/9/43: needs slight rewrite:
+```
 
+namespace FooModule\Model;
+use Laminas\Db\Sql\Sql;
+class FooModel{
+    public $userTableGateway;
+    ...
+    public function findSimilar(string $to){
+        $where = (new Where())->like('u.name', "{$to}%");
+        $sql = new Sql($this->userTableGateway->getAdapter());
+        $select = $sql->select();
+        $select->from(['u' => 'users'])
+               ->join(['g' => 'guestbook'], 'g.user_id = u.id')
+               ->where($where);
+        $rowset = $userTableGateway->selectWith($select);
+        return $rowset->toArray();
+    }
+    ...
+}
+```
 ## VM NOTES
 * phpMyAdmin needs to be updated!  incompatible with the current version of PHP

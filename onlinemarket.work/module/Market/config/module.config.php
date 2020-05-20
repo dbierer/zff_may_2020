@@ -300,6 +300,12 @@ return [
                             ],
                         ],
                     ],
+                    'csrf' => [
+                        'spec' => [
+                            'name' => 'csrf',
+                            'type' => 'csrf',
+                        ],
+                    ],
                     'submit' => [
                         'spec' => [
                             'name' => 'submit',

@@ -2,8 +2,25 @@
 <?php $this->postForm->prepare(); ?>
 <?= $this->form()->openTag($this->postForm); ?>
 <?= $this->formCollection($this->postForm); ?>
+<?= $this->formHidden($this->postForm->get('csrf')); ?>
 <?= $this->form()->closeTag(); ?>
 <hr>
 <?= $this->message ?>
 <hr>
 <pre><?= var_export($this->data, TRUE); ?></pre>
+<h3 style="color:red;">Invalid Fields</h3>
+Raw error messages coming directly from the validators, not the <em>Input</em> classes.
+<ul>
+<?php foreach ($this->postForm->getInputFilter()->getInvalidInput() as $input) : ?>
+	<li>
+		<?= $input->getName() . ':' ?>
+		<?php foreach ($input->getValidatorChain()->getValidators() as $chain) : ?>
+		<?php foreach ($chain as $validator) : ?>
+			<?php if ($validator && is_object($validator)) : ?>
+			<?php $error = $validator->getMessages(); ?>
+				<?= get_class($validator) . ':' . implode(',', $error); ?>
+			<?php endif; ?>
+		<?php endforeach; ?>
+		<?php endforeach; ?>
+	</li>
+<?php endforeach; ?>
