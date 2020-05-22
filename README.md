@@ -3,6 +3,8 @@
 ## TODO
 * Research settings needed to enable Whoops error handling
 * Diagram that summarizes Signals and Slots
+* Add clear cache option to laminas tools
+* Switch factory generator back to container interop
 
 ## Homework
 * For Mon 18 May
@@ -61,6 +63,8 @@ composer require --dev phpcl/laminas-tools
 * Laminas DB
   * https://docs.laminas.dev/laminas-db/
 ## Class Discussion
+* List of `module.config.php` file keys vs. `Module` class methods:
+  * https://docs.laminas.dev/laminas-modulemanager/module-manager/
 * Major Event Classes
   * https://github.com/laminas/laminas-modulemanager/blob/master/src/ModuleEvent.php
   * https://github.com/laminas/laminas-mvc/blob/master/src/MvcEvent.php

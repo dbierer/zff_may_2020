@@ -5,6 +5,7 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 class IndexController extends AbstractActionController
 {
+	use ListingsTableTrait;
 	protected $categories;
 	protected $config;
 	public function __construct(array $categories, array $config)
@@ -22,6 +23,7 @@ class IndexController extends AbstractActionController
 				'request' => $this->getRequest(),
 				'dayWeekMonth' => $this->dayWeekMonth(),
 				'categories' => $this->categories,
+				'item' => $this->table->findLatest(),
 			]
 		);
     }

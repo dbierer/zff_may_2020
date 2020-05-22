@@ -16,6 +16,7 @@ return [
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
+                        'module'     => __NAMESPACE__
                     ],
                 ],
                 'may_terminate' => TRUE,
@@ -47,10 +48,11 @@ return [
 					'view' => [
 						'type'    => Segment::class,
 						'options' => [
-							'route'    => '/view',
+							'route'    => '/view/category[/:category]',
 							'defaults' => [
 								'controller' => Controller\ViewController::class,
 								'action'     => 'index',
+								'category'   => 'free',
 							],
 						],
 					],

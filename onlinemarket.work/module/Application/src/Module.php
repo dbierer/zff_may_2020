@@ -17,7 +17,15 @@ class Module
     {
         $em = $e->getApplication()->getEventManager();
         $em->attach(MvcEvent::EVENT_DISPATCH, [$this, 'onDispatch'], 99);
+        $em->attach(MvcEvent::EVENT_DISPATCH, [$this, 'onModule'], 999);
     }
+    public function onModule(MvcEvent $e)
+    {
+		$module = $e->getRouteMatch()->getParam('module',NULL);
+		echo 'MODULE: ' . $module;
+		// NOTE: could do something specific to this module
+		//       for example if it's the "Admin" module, switch layouts
+	}
     public function onDispatch(MvcEvent $e)
     {
         $container = $e->getApplication()->getServiceManager();

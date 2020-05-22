@@ -5,8 +5,11 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 class ViewController extends AbstractActionController
 {
+	use ListingsTableTrait;
     public function indexAction()
     {
-        return new ViewModel();
+		$category = $this->params()->fromRoute('category', 'free');
+		$list = $this->table->findByCategory($category);
+        return new ViewModel(['list' => $list, 'category' => $category]);
     }
 }

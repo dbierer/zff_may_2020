@@ -1,7 +1,7 @@
 <?php
-
 namespace Market\Controller;
 
+use Model\Table\ListingsTable;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Market\Controller\IndexController;
@@ -16,6 +16,8 @@ class IndexControllerFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new IndexController($container->get('global-categories'), $container->get('Config'));
+        $controller = new IndexController($container->get('global-categories'), $container->get('Config'));
+        $controller->setTable($container->get(ListingsTable::class));
+        return $controller;
     }
 }

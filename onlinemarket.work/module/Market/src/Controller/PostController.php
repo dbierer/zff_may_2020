@@ -6,6 +6,7 @@ use Laminas\View\Model\ViewModel;
 use Laminas\Form\Form;
 class PostController extends AbstractActionController
 {
+	use ListingsTableTrait;
 	protected $form = '';
 	public function __construct(Form $form)
 	{

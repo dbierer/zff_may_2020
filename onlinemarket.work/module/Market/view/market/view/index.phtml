@@ -1,2 +1,8 @@
-<h1>Market View</h1>
-ViewController
+<h1><?= $this->escapeHtml(ucfirst($this->category)) ?></h1>
+<?php if ($this->list) : ?>
+	<?php foreach ($this->list as $item) : ?>
+	<?php var_dump($item); ?>
+	<?php endforeach; ?>
+<?php else : ?>
+No Items Found for This Category
+<?php endif; ?>

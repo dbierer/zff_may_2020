@@ -26,6 +26,8 @@ return [
     'Application',
     'Market',
     'Demo',
+    'Model',
 ];
+
 
 

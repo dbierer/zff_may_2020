@@ -24,6 +24,7 @@ return [
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
+                        'module'     => __NAMESPACE__
                     ],
                 ],
             ],
@@ -34,6 +35,7 @@ return [
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
+                        'module'     => __NAMESPACE__
                     ],
                 ],
             ],

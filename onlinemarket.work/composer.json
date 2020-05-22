@@ -25,7 +25,8 @@
         "psr-4": {
             "Application\\": "module/Application/src/",
             "Market\\": "module/Market/src/",
-            "Demo\\": "module/Demo/src/"
+            "Demo\\": "module/Demo/src/",
+            "Model\\": "module/Model/src/"
         }
     },
     "autoload-dev": {
